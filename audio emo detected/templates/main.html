@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Speech Emotion Detection</title>
+  <style>
+  .button {
+  background-color: #4CAF50; /* green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+body {
+  background-image: url('bg.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+div.container3 {
+   height: 10em;
+   position: relative }              /* 1 */
+div.container3 p {
+   margin: 0;
+   position: absolute;               /* 2 */
+   top: 50%;                         /* 3 */
+   transform: translate(0, -50%) }   /* 4 */
+
+
+
+.button4 {border-radius: 12px;}
+
+  </style>
+</head>
+<body>
+<center><h1> Speech Emotion Recognition </h1>
+  <br/><br/><br/><br/>
+
+<form action="http://localhost:5000/record" method="POST" enctype = "multipart/form-data">
+<input type="submit" class="button button4" name="submit" value="START RECORD">
+</form>
+</center>
+</body>
+</html>

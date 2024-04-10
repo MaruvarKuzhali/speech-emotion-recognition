@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Speech Emotion Detection</title>
+  <style>
+  .button {
+  background-color: #4CAF50; /* green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+body {
+  background-image: url('bg.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+div.container5 {
+  height: 10em;
+  display: flex;
+  align-items: center }
+div.container5 p {
+  margin: 0 }
+
+
+.button4 {border-radius: 12px;}
+
+  </style>
+</head>
+<body>
+<center><h2>SPEECH EMOTION RECOGNITION</h2></center>
+<br><br>
+<center>
+<form action="http://127.0.0.1:3000/" method="get">
+<div class="container3">
+<button class="button button4" id="start" name="start"> START RECORD </button>
+<button class="button button4" id="stop" name="stop">STOP RECORD </button><br><br>
+<audio id="audio_play" name="playaudio" controls>
+</audio><br><br>
+<input type="submit" value="submit">
+</form>
+</div>
+</center>
+</body>
+<script type="text/javascript">
+  
+    let audio_in = { audio: true }; 
+    navigator.mediaDevices.getUserMedia(audio_in) //access permission
+      .then(function (mediaStreamObj) {
+        let audio = document.createElement('audio'); //creating an audio tag to create mediastream object
+        if ("srcObject" in audio) { //if srcObject
+          audio.srcObject = mediaStreamObj; 
+        } 
+        else {   
+          audio.src = window.URL.createObjectURL(mediaStreamObj); 
+        } 
+  
+          
+        // Start record 
+        let start = document.getElementById('start'); 
+  
+        // Stop record 
+        let stop = document.getElementById('stop'); 
+  
+        // 2nd audio tag for play the audio 
+        let playAudio = document.getElementById('audio_play'); 
+  
+        // This is the main thing to recorde  
+        // the audio 'MediaRecorder' API 
+        let mediaRecorder = new MediaRecorder(mediaStreamObj); 
+        // Pass the audio stream  
+  
+        // Start event 
+        start.addEventListener('click', function (ev) { 
+          mediaRecorder.start(); 
+          // console.log(mediaRecorder.state); 
+        }) 
+  
+        // Stop event 
+        stop.addEventListener('click', function (ev) { 
+          mediaRecorder.stop(); 
+          // console.log(mediaRecorder.state); 
+        }); 
+  
+        // If audio data available then push  
+        // it to the chunk array 
+        mediaRecorder.ondataavailable = function (ev) { 
+          dataArray.push(ev.data); 
+        } 
+  
+        // Chunk array to store the audio data  
+        let dataArray = []; 
+  
+        // Convert the audio data in to blob  
+        // after stopping the recording 
+        mediaRecorder.onstop = function (ev) { 
+  
+          // blob of type wav
+          let audioData = new Blob(dataArray,  
+                    { 'type': 'audio/wav;codecs=MS_PCM' }); 
+            
+          // After fill up the chunk  
+          // array make it empty 
+          dataArray = []; 
+  
+          // Creating audio url with reference  
+          // of created blob named 'audioData' 
+          let audioSrc = window.URL 
+              .createObjectURL(audioData); 
+  
+          // Pass the audio url to the 2nd audio tag 
+          playAudio.src = audioSrc; 
+        } 
+      }) 
+  
+      // If any error occurs then handles the error  
+      .catch(function (err) { 
+        console.log(err.name, err.message); 
+      }); 
+</script>
+</html>

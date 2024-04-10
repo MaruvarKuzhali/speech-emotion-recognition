@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+</head>
+<body>
+<div class="data" align="center">
+    {% if data %}
+    	
+        <br> <h1>Emotion Detected: </h1>
+           <h2 style="font-size:50px">{{ data }}</h2>
+        
+    {% endif %}
+</div>
+<div class="category" align="center">
+	{% if category %}
+	<br><h1>System reply:</h1>
+	<h2 style="font-size: 50px">{{ category }} :</h2>
+	{% endif %}
+</div>
+<div class="data1" align="center">
+	{% if data1 %}
+	<h2 style="font-size: 50px">{{ data1 }}</h2>
+	{% endif %}
+</div>
+<div class="data2" align="center">
+	{% if data2 %}
+	<h2>Redirecting in 5 seconds</h2>
+	<script type="text/javascript">
+	(function(){
+   		setTimeout(function(){
+     	window.location="{{data2}}";
+   		},5000); /* 1000 = 1 second*/
+})();
+</script>
+	{% endif %}
+</div>
+<div class="data3" align="center">
+	{% if data3 %}
+		<img src="{{data3}}">
+	{% endif %}
+</div>
+</body>
+</html>
